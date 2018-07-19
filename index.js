@@ -1,22 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
+import {debounce} from "./utils";
 
-function debounce(func, wait, immediate) {
-  var timeout;
-  return function() {
-    var context = this,
-      args = arguments;
-    var later = function() {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-    var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
-}
 
 class TextTruncate extends React.Component {
   static propTypes = {
@@ -214,15 +199,5 @@ class TextTruncate extends React.Component {
     );
   }
 }
-
-ReactDOM.render(
-  <div style={{ width: 200, backgroundColor: "red" }}>
-    <TextTruncate
-      lines={2}
-      text={"test text that test text that test text that test text that test text that test text that test text that test text that"}
-    />
-  </div>,
-  document.getElementById("root")
-);
 
 export default TextTruncate;

@@ -1,0 +1,9 @@
+{
+  "name": "text-truncate",
+  "version": "0.1.0",
+  "description": "A simple react component that replaces long text with an ellipsis based on width of container, and number of lines allowed.",
+  "main": "index.js",
+  "repository": "git@github.com:alexseitsinger/text-truncate.git",
+  "author": "Alex Seitsinger <alexsetisinger@gmail.com>",
+  "license": "MIT"
+}
