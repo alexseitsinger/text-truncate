@@ -145,8 +145,10 @@ class TextTruncate extends React.Component {
   updateTruncatedText = () => {
     // Format the text to fit the number of lines specified.
     var lines = this.props.lines;
+    var totalLines = lines
     // Build the sections of text that fit the parent container width.
     var { bits, sections } = this.buildSections();
+    var totalSections = Object.keys(sections).length
     // Collect the string sections into a shortened string.
     var includedSections = [];
     while (lines--) {
@@ -166,11 +168,18 @@ class TextTruncate extends React.Component {
     var truncatedText = "";
     if (
       includedSections.length === 1 &&
-      includedSections.length === bits.length
+      includedSections.length === bits.length ||
+      totalSections <= totalLines
     ) {
       truncatedText = includedSections.join(" ");
     } else {
-      truncatedText = includedSections.concat(["..."]).join(" ");
+      var lastSection = includedSections.pop()
+      var lastSectionLength = lastSection.length
+      var ellipsis = "..."
+      var lastSectionRem = (lastSectionLength - ellipsis.length)
+      var newLastSection = lastSection.slice(0, lastSectionRem)
+      includedSections.push(newLastSection)
+      truncatedText = includedSections.concat([ellipsis]).join(" ");
     }
     // Save the truncated text string to state for rendering.
     this.setState({
